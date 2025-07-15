@@ -34,4 +34,13 @@ dependencies:
   - xarray
   - xugrid
   - xlrd
+  # build dependencies
+  - pkg-config
+  - meson
+  - ninja
+  - gfortran
+  - openmpi
+  - libnetcdf
+  - netcdf-fortran
+  - petsc=3.20.5
 

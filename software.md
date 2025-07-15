@@ -13,18 +13,20 @@ The following instructions will guide you through the installation process and s
 ## Part 2 -- Create an Environment File
 We will use an environment file to create a containerized version of Python and the Python packages needed for the class.  An environment file is simply a list of packages that we want to install in our environment.
 
-1. Using a text editor, such as Notepad or Notepad++, create a file called `environment.yml`.  It should contain the information in [this environment file](./environment.yml).  Save this file to your hard drive, preferably in your user home folder so that it can be easily accessed in the next step. (Caution!  Notepad will automatically append a .txt suffix to your file name; you don't want this to happen.)
+1. Using a text editor, such as Notepad or Notepad++, create a file called `environment.yml`.  It should contain the information in [this environment file](https://github.com/christianlangevin/MODFLOW-Madison2025/blob/main/environment.yml).  Save this file to your hard drive, preferably in your user home folder so that it can be easily accessed in the next step. (Caution!  Notepad will automatically append a .txt suffix to your file name; you don't want this to happen.)
 
 <!-- 2. **For Mac and Linux users only!** You will need to add six additional dependencies to the `environment.yml` file from step 1.  The following dependencies are also required: 
 
 ```
   # parallel modflow build dependencies
   - pkg-config
-  - openmpi
-  - gfortran
-  - petsc
-  - meson>=1.1.0
+  - meson
   - ninja
+  - gfortran
+  - openmpi
+  - libnetcdf
+  - netcdf-fortran
+  - petsc=3.20.5
 ```   -->
 
 ## Part 3.  Create the `madison25flopy` Environment
@@ -33,7 +35,7 @@ We will use an environment file to create a containerized version of Python and 
 
 2. At the terminal prompt enter the following command, where `<path to file>` is the location of the `environment.yml` file that you created in Part 2.  You will need to be connected to the internet for this to work properly.  The installation process may take a couple of minutes.
 ```
-conda env create --file <path to file>/environment.yml
+mamba env create --file <path to file>/environment.yml
 ```
 
 3.  After the environment has been installed, you may activate this new class environment with the following command
@@ -56,6 +58,62 @@ For most users, the setup is complete at this point.  For those working on a Mac
 
 ## Part 4.  Obtaining MODFLOW 6
 
-We will be using the extended version of MODFLOW 6 in this workshop.  If you are working on Windows, then you can download the extended version of MODFLOW 6 from [here](https://github.com/MODFLOW-ORG/modflow6/releases).  Note that we will also walk through this step during the workshop.  The distribution file for windows that includes the parallel version is called `mf6.2.2_win64ext.zip`.
+We will be using the extended version of MODFLOW 6 in this workshop.  
 
-If you are using a Mac or Linux laptop for the workshop, then you will need to build the parallel version of MODFLOW.  We have simplified the build process, which can be completed in just a few minutes.  Instructions for building the parallel version of MODFLOW 6 are located [here](./build_parallel_mf6.md).
+### Windows
+
+If you are working on Windows, you can install the extended version of MODFLOW 6 by activating the workshop environment using:
+
+```
+conda activate madison25flopy
+```
+
+and then running:
+```
+get-modflow --repo modflow6 --ostag win64ext :python
+```
+
+and finally running:
+```
+get-modflow --subset gridgen,triangle :python
+```
+
+You can also download the extended version of MODFLOW 6 from [here](https://github.com/MODFLOW-ORG/modflow6/releases).  
+
+Note that we will also walk through this step during the workshop.  The distribution file for windows that includes the parallel version is called `mf6.2.2_win64ext.zip`.
+
+# Mac and Linux
+
+If you are using a Mac or Linux laptop for the workshop, then you will need to build the parallel version of MODFLOW.  We have simplified the build process, which can be completed in just a few minutes. You will need to install git on your laptop if you don't already have it. 
+
+1. Download the workshop GitHub repository using:
+```
+git clone https://github.com/christianlangevin/MODFLOW-Madison2025.git
+```
+
+2. Activate the madison25flopy environment
+```
+conda activate madison25flopy
+```
+
+3. Navigate to the root directory of the workshop GitHub repository and run the MODFLOW 6 build script using:
+```
+sh nix-build.sh  
+```
+
+4. If the build is successful you should see the following:
+```
+ Normal termination of simulation.
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+5/5 Parallel simulation test - 2 cores  OK              0.10s
+
+
+Ok:                5   
+Fail:              0   
+
+Full log written to /path/to/the/class/github/repo/MODFLOW-Madison2025/modflow6/builddir/meson-logs/testlog.txt
+
+Finished...
+
+
+```
