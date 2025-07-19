@@ -1,6 +1,6 @@
-![alt](./images/header.png)
-
 # MODFLOW-Madison2025
+
+![alt](./images/ClassLocation.jpg)
 
 # Advanced Groundwater Modeling Techniques with MODFLOW 6 and PEST++: A 2-day informal in-person workshop
 
@@ -20,19 +20,20 @@ Registration: https://forms.gle/o5Yn6fjgRAToBQ6w8
 
 # Agenda
 
-* Introductions and Overview
-* Checking your installation
-* Overview of MODFLOW 6
-* Brief introduction to FloPy
-* Structured and unstructured grids (DIS, DISV, DISU) and LGR
+* Welcome (Mike, Chris, Joe)
+* Checking your installation (Joe)
+* Overview of MODFLOW 6 (Chris)
+* Brief introduction to FloPy (Joe)
+* Structured and unstructured grids (DIS, DISV, DISU) and LGR (Chris)
 * Transport
-  * Particle tracking - PRT
-  * Solute transport - GWT
-  * Energy transport - GWE
-  * Variable density groundwater flow and transport
-* Extended MODFLOW 6 - parallel, netcdf/ugrid
-* MODFLOW API demonstration
-* Surface Water Flow (SWF) demonstration
+  * Particle tracking - PRT (Joe)
+  * Solute transport - GWT (Chris)
+  * Energy transport - GWE (Chris)
+  * Variable density groundwater flow and transport (Chris)
+* Extended MODFLOW 6 - parallel, netcdf/ugrid (Joe)
+* MODFLOW API demonstration (Joe)
+* Surface Water Flow (SWF) demonstration (Chris)
+* Wrap up
 
 ## Software
 
